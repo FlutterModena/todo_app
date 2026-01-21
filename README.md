@@ -9,6 +9,12 @@ Il design è stato generato con Stitch, puoi trovarlo e remixarlo a piacimento [
 
 ## Avvia l'applicazione
 
+Se usi FVM, assicurati di usare la versione di Flutter specificata nel file [.fvmrc](.fvmrc):
+
+```bash
+fvm install # Prende in automatico la versione specificata
+```
+
 Per avviare l'applicazione, esegui il comando nella root del progetto:
 
 ```bash
