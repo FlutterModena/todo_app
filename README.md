@@ -7,7 +7,7 @@ Il codice viene sviluppato in diretta durante gli incontri e reso disponibile su
 
 Il design è stato generato con Stitch, puoi trovarlo e remixarlo a piacimento [qui](https://stitch.withgoogle.com/projects/5285651983051650140).
 
-## Start the app
+## Avvia l'applicazione
 
 Per avviare l'applicazione, esegui il comando nella root del progetto:
 
@@ -16,6 +16,12 @@ flutter run
 ```
 
 oppure da VSCode, seleziona il target dispositivo e lancia l'applicazione con una delle configurazioni disponibili in [launch.json](.vscode/launch.json).
+
+## Continua a sviluppare!
+
+Per continuare a sviluppare l'applicazione, apri il progetto con il tuo editor preferito (VSCode, Android Studio, IntelliJ, ecc.) e modifica i file nella cartella `lib`.
+
+Puoi aggiungere codice all'interno del file [main.dart](lib/main.dart) oppure creare nuovi file Dart e importarli nel file principale (per strutturare meglio il codice).
 
 ## Flutter - Getting Started
 
