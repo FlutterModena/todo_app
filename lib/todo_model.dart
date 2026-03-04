@@ -1,3 +1,4 @@
+import 'package:flutter/material.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
 part 'todo_model.freezed.dart';
@@ -11,6 +12,12 @@ enum TodoCategory {
         TodoCategory.work => "Lavoro",
         TodoCategory.personal => "Personale",
         TodoCategory.shopping => "Spesa",
+      };
+
+  IconData get icon => switch (this) {
+        TodoCategory.work => Icons.work,
+        TodoCategory.personal => Icons.person,
+        TodoCategory.shopping => Icons.shopping_cart,
       };
 }
 
