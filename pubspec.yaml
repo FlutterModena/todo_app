@@ -36,6 +36,8 @@ dependencies:
   cupertino_icons: ^1.0.8
   intl: any
   freezed_annotation: ^3.1.0
+  flutter_riverpod: 3.1.0
+  riverpod_annotation: ^4.0.0
   json_annotation: ^4.11.0
 
 dev_dependencies:
