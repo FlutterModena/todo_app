@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:test/models/todo_model.dart';
+import 'package:test/todo_model.dart';
 
 class UpsertTodoPage extends StatefulWidget {
   const UpsertTodoPage({

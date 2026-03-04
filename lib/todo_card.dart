@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:test/extensions.dart';
-import 'package:test/models/todo_model.dart';
+import 'package:test/todo_model.dart';
 
 class TodoCard extends StatelessWidget {
   const TodoCard({

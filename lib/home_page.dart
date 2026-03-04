@@ -1,9 +1,9 @@
 
 import 'package:flutter/material.dart';
 import 'package:test/extensions.dart';
-import 'package:test/models/todo_model.dart';
-import 'package:test/widgets/todo_card.dart';
-import 'package:test/widgets/todo_filters.dart';
+import 'package:test/todo_model.dart';
+import 'package:test/todo_card.dart';
+import 'package:test/todo_filters.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
