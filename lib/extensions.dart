@@ -29,3 +29,13 @@ extension DateTimeExtension on DateTime {
         day == tomorrow.day;
   }
 }
+
+/// The main [Widget] extension.
+extension WidgetExtension on Widget {
+  /// A shortcut to push a new page on the navigation stack.
+  Future<T?> push<T>(BuildContext context) => Navigator.of(context).push<T>(
+    MaterialPageRoute(
+      builder: (context) => this,
+    ),
+  );
+}
