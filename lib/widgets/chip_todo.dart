@@ -13,10 +13,10 @@ class ChipTodo extends StatelessWidget {
     return Container(
       decoration: BoxDecoration(
         color: bgColor,
-        borderRadius: BorderRadius.circular(20),
+        borderRadius: .circular(20),
       ),
       child: Padding(
-        padding: EdgeInsets.symmetric(horizontal: 16),
+        padding: .symmetric(horizontal: 16),
         child: Center(
           child: Text(
             title,

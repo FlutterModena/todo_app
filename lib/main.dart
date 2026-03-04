@@ -50,8 +50,8 @@ class _MyHomePageState extends State<MyHomePage> {
         description: 'Description 1',
         category: 'Category 1',
         isCompleted: false,
-        createdAt: DateTime.now(),
-        expireAt: DateTime.now().add(Duration(days: 7)),
+        createdAt: .now(),
+        expireAt: .now().add(Duration(days: 7)),
       ),
     ];
     return Scaffold(
@@ -74,26 +74,23 @@ class _MyHomePageState extends State<MyHomePage> {
         ],
       ),
       body: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 16),
+        padding: .symmetric(horizontal: 16),
         child: CustomScrollView(
           slivers: [
             SliverToBoxAdapter(
               child: Padding(
-                padding: const EdgeInsets.only(
-                  top: 16,
-                  bottom: 4,
-                ),
+                padding: .only(top: 16, bottom: 4),
                 child: Text(
                   'Ciao! Ecco i tuoi task',
                   style: context.textTheme.headlineLarge?.copyWith(
-                    fontWeight: FontWeight.bold,
+                    fontWeight: .bold,
                   ),
                 ),
               ),
             ),
             SliverToBoxAdapter(
               child: Padding(
-                padding: const EdgeInsets.only(bottom: 24),
+                padding: .only(bottom: 24),
                 child: Text(DateTime.now().format('EEEE, dd MMMM')),
               ),
             ),
@@ -104,7 +101,7 @@ class _MyHomePageState extends State<MyHomePage> {
               ),
             ),
             SliverPadding(
-              padding: const EdgeInsets.symmetric(vertical: 16),
+              padding: .symmetric(vertical: 16),
               sliver: SliverList.separated(
                 itemCount: todos.length,
                 separatorBuilder: (_, _) => SizedBox(height: 16),
