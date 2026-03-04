@@ -4,6 +4,7 @@ import 'package:test/extensions.dart';
 import 'package:test/todo_model.dart';
 import 'package:test/todo_card.dart';
 import 'package:test/todo_filters.dart';
+import 'package:test/upsert_todo_page.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -57,7 +58,12 @@ class _HomePageState extends State<HomePage> {
       ),
       floatingActionButton: FloatingActionButton(
         onPressed: () {
-          // TODO(dariowskii): Navigate to add todo page
+          // TODO(dariowskii): create a shorcut in extensions for this
+          Navigator.of(context).push(
+            MaterialPageRoute(
+              builder: (_) => UpsertTodoPage(),
+            ),
+          );
         },
         child: Icon(Icons.add),
       ),
