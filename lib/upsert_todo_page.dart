@@ -56,6 +56,44 @@ class _UpsertTodoPageState extends State<UpsertTodoPage> {
     Navigator.of(context).pop();
   }
 
+  void _changeExpireAt() async {
+    final selectedDate = await showDatePicker(
+      context: context,
+      initialDate: _todo.expireAt,
+      firstDate: DateTime.now(),
+      lastDate: DateTime.now().add(
+        Duration(days: 365),
+      ),
+    );
+
+    if (selectedDate == null || !mounted) {
+      return;
+    }
+
+    final selectedTime = await showTimePicker(
+      context: context,
+      initialTime: TimeOfDay.fromDateTime(
+        _todo.expireAt,
+      ),
+    );
+
+    if (selectedTime == null) {
+      return;
+    }
+
+    final newExpireAt = DateTime(
+      selectedDate.year,
+      selectedDate.month,
+      selectedDate.day,
+      selectedTime.hour,
+      selectedTime.minute,
+    );
+
+    setState(() {
+      _todo = _todo.copyWith(expireAt: newExpireAt);
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     final pageTitle = isEdit ? "Modifica Todo" : "Aggiungi Todo";
@@ -182,40 +220,7 @@ class _UpsertTodoPageState extends State<UpsertTodoPage> {
                             Spacer(),
                             IconButton(
                               icon: Icon(Icons.chevron_right),
-                              onPressed: () {
-                                showDatePicker(
-                                  context: context,
-                                  initialDate: _todo.expireAt,
-                                  firstDate: DateTime.now(),
-                                  lastDate: DateTime.now().add(
-                                    Duration(days: 365),
-                                  ),
-                                ).then((selectedDate) {
-                                  if (selectedDate != null && context.mounted) {
-                                    showTimePicker(
-                                      context: context,
-                                      initialTime: TimeOfDay.fromDateTime(
-                                        _todo.expireAt,
-                                      ),
-                                    ).then((selectedTime) {
-                                      if (selectedTime != null) {
-                                        final newExpireAt = DateTime(
-                                          selectedDate.year,
-                                          selectedDate.month,
-                                          selectedDate.day,
-                                          selectedTime.hour,
-                                          selectedTime.minute,
-                                        );
-                                        setState(() {
-                                          _todo = _todo.copyWith(
-                                            expireAt: newExpireAt,
-                                          );
-                                        });
-                                      }
-                                    });
-                                  }
-                                });
-                              },
+                              onPressed: _changeExpireAt,
                             ),
                           ],
                         ),
@@ -253,7 +258,10 @@ class _UpsertTodoPageState extends State<UpsertTodoPage> {
                         children: [
                           Icon(Icons.delete, color: context.colorScheme.error),
                           SizedBox(width: 8),
-                          Text("Elimina", style: TextStyle(color: context.colorScheme.error)),
+                          Text(
+                            "Elimina",
+                            style: TextStyle(color: context.colorScheme.error),
+                          ),
                         ],
                       ),
                     ),
