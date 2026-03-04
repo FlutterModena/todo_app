@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:test/extensions.dart';
 import 'package:test/widgets/chip_todo.dart';
 
 void main() => runApp(const MyApp());
@@ -43,7 +44,15 @@ class _MyHomePageState extends State<MyHomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Text(widget.title)),
+      appBar: AppBar(
+        title: Text(
+          widget.title,
+          style: context.textTheme.titleLarge?.copyWith(
+            fontWeight: FontWeight.bold,
+          ),
+        ),
+        centerTitle: false,
+      ),
       body: SizedBox(
         height: 32,
         child: ListView(
