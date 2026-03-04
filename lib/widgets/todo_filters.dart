@@ -13,26 +13,23 @@ class TodoFilters extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    const filters = ["Tutti", "Lavoro", "Personale"];
+    
     return SizedBox(
       height: 32,
-      child: ListView(
+      child: ListView.separated(
         scrollDirection: .horizontal,
-        children: [
-          GestureDetector(
-            onTap: () => onChange(0),
-            child: ChipTodo(title: "Tutti", isActive: currentIndex == 0),
-          ),
-          SizedBox(width: 16),
-          GestureDetector(
-            onTap: () => onChange(1),
-            child: ChipTodo(title: "Lavoro", isActive: currentIndex == 1),
-          ),
-          SizedBox(width: 16),
-          GestureDetector(
-            onTap: () => onChange(2),
-            child: ChipTodo(title: "Personale", isActive: currentIndex == 2),
-          ),
-        ],
+        separatorBuilder: (context, index) => SizedBox(width: 16),
+        itemCount: filters.length,
+        itemBuilder: (context, index) {
+          return GestureDetector(
+            onTap: () => onChange(index),
+            child: ChipTodo(
+              title: filters[index],
+              isActive: currentIndex == index,
+            ),
+          );
+        },
       ),
     );
   }
