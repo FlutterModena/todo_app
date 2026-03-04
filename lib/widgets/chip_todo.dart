@@ -16,8 +16,15 @@ class ChipTodo extends StatelessWidget {
         borderRadius: BorderRadius.circular(20),
       ),
       child: Padding(
-        padding: EdgeInsets.all(5),
-        child: Text(title, style: TextStyle(color: Colors.white)),
+        padding: EdgeInsets.symmetric(horizontal: 16),
+        child: Center(
+          child: Text(
+            title,
+            style: TextStyle(
+              color: Colors.white,
+            ),
+          ),
+        ),
       ),
     );
   }
