@@ -19,7 +19,7 @@ class _HomePageState extends State<HomePage> {
       id: '1',
       title: 'Title 1',
       description: 'Description 1',
-      category: 'Category 1',
+      category: TodoCategory.work,
       isCompleted: false,
       createdAt: .now(),
       expireAt: .now().add(Duration(days: 7)),

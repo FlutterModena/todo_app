@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:test/chip_todo.dart';
+import 'package:test/todo_model.dart';
 
 class TodoFilters extends StatelessWidget {
   const TodoFilters({
@@ -13,7 +14,10 @@ class TodoFilters extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    const filters = ["Tutti", "Lavoro", "Personale"];
+    final filters = [
+      "Tutti",
+      ...TodoCategory.values.map((e) => e.label),
+    ];
 
     return SizedBox(
       height: 32,

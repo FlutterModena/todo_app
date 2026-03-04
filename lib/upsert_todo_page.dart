@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:test/extensions.dart';
 import 'package:test/todo_model.dart';
 
 class UpsertTodoPage extends StatefulWidget {
@@ -21,8 +22,14 @@ class _UpsertTodoPageState extends State<UpsertTodoPage> {
     final pageTitle = isEdit ? "Modifica Todo" : "Aggiungi Todo";
     return Scaffold(
       appBar: AppBar(
-        title: Text(pageTitle),
+        title: Text(
+          pageTitle,
+          style: context.textTheme.titleLarge?.copyWith(
+            fontWeight: .bold,
+          ),
+        ),
       ),
+      body: SingleChildScrollView(),
     );
   }
 }
