@@ -18,7 +18,6 @@ class TodoFilters extends StatelessWidget {
       child: ListView(
         scrollDirection: .horizontal,
         children: [
-          SizedBox(width: 16),
           GestureDetector(
             onTap: () => onChange(0),
             child: ChipTodo(title: "Tutti", isActive: currentIndex == 0),
