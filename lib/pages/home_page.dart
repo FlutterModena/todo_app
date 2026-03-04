@@ -36,6 +36,8 @@ class _HomePageState extends State<HomePage> {
     ];
     return Scaffold(
       appBar: AppBar(
+        forceMaterialTransparency: true,
+        leadingWidth: 64,
         leading: Column(
           mainAxisAlignment: .center,
           children: [
