@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:test/extensions.dart';
-import 'package:test/widgets/chip_todo.dart';
+import 'package:test/widgets/todo_filters.dart';
 
 void main() => runApp(const MyApp());
 
@@ -53,28 +53,15 @@ class _MyHomePageState extends State<MyHomePage> {
         ),
         centerTitle: false,
       ),
-      body: SizedBox(
-        height: 32,
-        child: ListView(
-          scrollDirection: .horizontal,
-          children: [
-            SizedBox(width: 16),
-            GestureDetector(
-              onTap: () => _changeFilter(0),
-              child: ChipTodo(title: "Tutti", isActive: _index == 0),
+      body: CustomScrollView(
+        slivers: [
+          SliverToBoxAdapter(
+            child: TodoFilters(
+              currentIndex: _index,
+              onChange: _changeFilter,
             ),
-            SizedBox(width: 16),
-            GestureDetector(
-              onTap: () => _changeFilter(1),
-              child: ChipTodo(title: "Lavoro", isActive: _index == 1),
-            ),
-            SizedBox(width: 16),
-            GestureDetector(
-              onTap: () => _changeFilter(2),
-              child: ChipTodo(title: "Personale", isActive: _index == 2),
-            ),
-          ],
-        ),
+          ),
+        ],
       ),
     );
   }
