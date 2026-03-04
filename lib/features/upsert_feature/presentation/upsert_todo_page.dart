@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:test/common/models/todo_model.dart';
 import 'package:test/extensions.dart';
-import 'package:test/features/home_feature/domain/todo_model.dart';
 
 /// A page that allows the user to create a new todo or edit an existing one.
 class UpsertTodoPage extends StatefulWidget {

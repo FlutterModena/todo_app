@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:test/extensions.dart';
-import 'package:test/features/home_feature/domain/todo_model.dart';
+import 'package:test/common/models/todo_model.dart';
 
 /// A widget that represents a single todo item in the list.
 class TodoCard extends StatelessWidget {

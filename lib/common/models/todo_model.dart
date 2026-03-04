@@ -33,7 +33,7 @@ enum TodoCategory {
 /// The main model class for a todo item,
 /// representing the data and properties of a single todo.
 @freezed
-abstract class TodoModel with _$TodoModel {
+abstract class  TodoModel with _$TodoModel {
   /// Creates a new [TodoModel] instance with the given properties.
   const factory TodoModel({
     /// A unique [id] identifier for the todo item.
