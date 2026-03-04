@@ -91,9 +91,7 @@ class _HomePageState extends ConsumerState<HomePage> {
             ),
             const SliverPadding(
               padding: .symmetric(vertical: 16),
-              sliver: SliverToBoxAdapter(
-                child: DynamicTodoList(),
-              ),
+              sliver: DynamicTodoList(),
             ),
           ],
         ),

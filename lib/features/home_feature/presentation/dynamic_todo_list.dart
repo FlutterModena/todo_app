@@ -16,7 +16,7 @@ class DynamicTodoList extends ConsumerWidget {
     final todoList = ref.watch(todoListProvider);
 
     return switch (todoList) {
-      AsyncData(value: final todos) => ListView.separated(
+      AsyncData(value: final todos) => SliverList.separated(
         itemCount: todos.length,
         separatorBuilder: (_, _) => const SizedBox(height: 16),
         itemBuilder: (_, index) {
@@ -36,9 +36,17 @@ class DynamicTodoList extends ConsumerWidget {
           );
         },
       ),
-      AsyncError(:final error) => Text('Errore: $error'),
-      _ => const Center(
-        child: CircularProgressIndicator(),
+      AsyncError(:final error) => SliverFillRemaining(
+        hasScrollBody: false,
+        child: Center(
+          child: Text('Errore: $error'),
+        ),
+      ),
+      _ => const SliverFillRemaining(
+        hasScrollBody: false,
+        child: Center(
+          child: CircularProgressIndicator(),
+        ),
       ),
     };
   }
