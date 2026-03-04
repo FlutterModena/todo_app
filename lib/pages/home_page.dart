@@ -54,7 +54,9 @@ class _HomePageState extends State<HomePage> {
         ],
       ),
       floatingActionButton: FloatingActionButton(
-        onPressed: () {},
+        onPressed: () {
+          // TODO(dariowskii): Navigate to add todo page
+        },
         child: Icon(Icons.add),
       ),
       body: Padding(

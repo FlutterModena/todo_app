@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:test/extensions.dart';
 
 class ChipTodo extends StatelessWidget {
   const ChipTodo({super.key, required this.title, required this.isActive});
@@ -8,7 +9,9 @@ class ChipTodo extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final bgColor = isActive ? Colors.blueAccent : Colors.black87;
+    final bgColor = isActive
+        ? context.colorScheme.primaryContainer
+        : context.colorScheme.surfaceContainer;
 
     return Container(
       decoration: BoxDecoration(

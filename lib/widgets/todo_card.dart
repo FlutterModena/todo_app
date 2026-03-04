@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:test/extensions.dart';
 import 'package:test/models/todo_model.dart';
 
 class TodoCard extends StatelessWidget {
@@ -11,9 +12,10 @@ class TodoCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    // TODO(dariowskii): Complete following the UI design
     return Container(
       decoration: BoxDecoration(
-        color: Colors.black87,
+        color: context.colorScheme.surfaceContainer,
         borderRadius: .circular(16),
       ),
       child: Padding(
