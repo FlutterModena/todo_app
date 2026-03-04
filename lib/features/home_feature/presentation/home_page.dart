@@ -2,9 +2,9 @@ import 'dart:async';
 
 import 'package:flutter/material.dart';
 import 'package:test/extensions.dart';
-import 'package:test/todo_card.dart';
-import 'package:test/todo_filters.dart';
-import 'package:test/todo_model.dart';
+import 'package:test/features/home_feature/presentation/todo_card.dart';
+import 'package:test/features/home_feature/presentation/todo_filters.dart';
+import 'package:test/features/home_feature/domain/todo_model.dart';
 import 'package:test/upsert_todo_page.dart';
 
 /// The home page of the app, where the list of todos is displayed.

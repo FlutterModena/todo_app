@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:test/chip_todo.dart';
-import 'package:test/todo_model.dart';
+import 'package:test/features/home_feature/presentation/chip_todo.dart';
+import 'package:test/features/home_feature/domain/todo_model.dart';
 
 /// A widget that displays a list of filters for the todos.
 class TodoFilters extends StatelessWidget {
