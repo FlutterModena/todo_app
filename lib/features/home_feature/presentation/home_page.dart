@@ -1,34 +1,24 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
-import 'package:test/common/models/todo_model.dart';
-import 'package:test/extensions.dart';
-import 'package:test/features/home_feature/presentation/todo_card.dart';
-import 'package:test/features/home_feature/presentation/todo_filters.dart';
-import 'package:test/features/upsert_feature/presentation/upsert_todo_page.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:todo_app/extensions.dart';
+import 'package:todo_app/features/home_feature/data/todo_provider.dart';
+import 'package:todo_app/features/home_feature/presentation/todo_card.dart';
+import 'package:todo_app/features/home_feature/presentation/todo_filters.dart';
+import 'package:todo_app/features/upsert_feature/presentation/upsert_todo_page.dart';
 
 /// The home page of the app, where the list of todos is displayed.
-class HomePage extends StatefulWidget {
+class HomePage extends ConsumerStatefulWidget {
   /// Creates a [HomePage] widget.
   const HomePage({super.key});
 
   @override
-  State<HomePage> createState() => _HomePageState();
+  ConsumerState<HomePage> createState() => _HomePageState();
 }
 
-class _HomePageState extends State<HomePage> {
+class _HomePageState extends ConsumerState<HomePage> {
   int _index = 0;
-  late final todos = [
-    TodoModel(
-      id: 0,
-      title: 'Title 1',
-      description: 'Description 1',
-      category: .work,
-      isCompleted: false,
-      createdAt: .now(),
-      expireAt: .now().add(const Duration(days: 7)),
-    ),
-  ];
 
   void _changeFilter(int index) {
     setState(() {
@@ -38,6 +28,7 @@ class _HomePageState extends State<HomePage> {
 
   @override
   Widget build(BuildContext context) {
+    final todoList = ref.watch(todoListProvider);
     return Scaffold(
       appBar: AppBar(
         forceMaterialTransparency: true,
@@ -102,26 +93,36 @@ class _HomePageState extends State<HomePage> {
             ),
             SliverPadding(
               padding: const .symmetric(vertical: 16),
-              sliver: SliverList.separated(
-                itemCount: todos.length,
-                separatorBuilder: (_, _) => const SizedBox(height: 16),
-                itemBuilder: (_, index) {
-                  return GestureDetector(
-                    onTap: () {
-                      unawaited(
-                        Navigator.of(context).push(
-                          MaterialPageRoute(
-                            builder: (_) => UpsertTodoPage(
-                              todo: todos[index],
+              sliver: switch (todoList) {
+                AsyncData(value: final todos) => SliverList.separated(
+                  itemCount: todos.length,
+                  separatorBuilder: (_, _) => const SizedBox(height: 16),
+                  itemBuilder: (_, index) {
+                    return GestureDetector(
+                      onTap: () {
+                        unawaited(
+                          Navigator.of(context).push(
+                            MaterialPageRoute(
+                              builder: (_) => UpsertTodoPage(
+                                todo: todos[index],
+                              ),
                             ),
                           ),
-                        ),
-                      );
-                    },
-                    child: TodoCard(todo: todos[index]),
-                  );
-                },
-              ),
+                        );
+                      },
+                      child: TodoCard(todo: todos[index]),
+                    );
+                  },
+                ),
+                AsyncError(:final error) => SliverToBoxAdapter(
+                  child: Text('Errore: $error'),
+                ),
+                _ => const SliverToBoxAdapter(
+                  child: Center(
+                    child: CircularProgressIndicator(),
+                  ),
+                ),
+              },
             ),
           ],
         ),

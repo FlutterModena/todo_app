@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:test/extensions.dart';
+import 'package:todo_app/extensions.dart';
 
 /// A simple widget that represents a chip with a title and an active state.
 class ChipTodo extends StatelessWidget {
