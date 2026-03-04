@@ -23,7 +23,7 @@ class _HomePageState extends State<HomePage> {
       id: 0,
       title: 'Title 1',
       description: 'Description 1',
-      category: TodoCategory.work,
+      category: .work,
       isCompleted: false,
       createdAt: .now(),
       expireAt: .now().add(const Duration(days: 7)),
@@ -105,7 +105,22 @@ class _HomePageState extends State<HomePage> {
               sliver: SliverList.separated(
                 itemCount: todos.length,
                 separatorBuilder: (_, _) => const SizedBox(height: 16),
-                itemBuilder: (_, index) => TodoCard(todo: todos[index]),
+                itemBuilder: (_, index) {
+                  return GestureDetector(
+                    onTap: () {
+                      unawaited(
+                        Navigator.of(context).push(
+                          MaterialPageRoute(
+                            builder: (_) => UpsertTodoPage(
+                              todo: todos[index],
+                            ),
+                          ),
+                        ),
+                      );
+                    },
+                    child: TodoCard(todo: todos[index]),
+                  );
+                },
               ),
             ),
           ],
