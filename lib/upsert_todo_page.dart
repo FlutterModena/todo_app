@@ -2,12 +2,15 @@ import 'package:flutter/material.dart';
 import 'package:test/extensions.dart';
 import 'package:test/todo_model.dart';
 
+/// A page that allows the user to create a new todo or edit an existing one.
 class UpsertTodoPage extends StatefulWidget {
+  /// Creates an [UpsertTodoPage] widget.
   const UpsertTodoPage({
     super.key,
     this.todo,
   });
 
+  /// The todo to edit, or null if creating a new one.
   final TodoModel? todo;
 
   @override
@@ -22,9 +25,9 @@ class _UpsertTodoPageState extends State<UpsertTodoPage> {
   late final _descriptionController = TextEditingController(
     text: widget.todo?.description,
   );
-  late var _category = widget.todo?.category ?? TodoCategory.personal;
+  late TodoCategory _category = widget.todo?.category ?? TodoCategory.personal;
 
-  late var _todo =
+  late TodoModel _todo =
       widget.todo ??
       TodoModel(
         id: 0,
@@ -32,7 +35,7 @@ class _UpsertTodoPageState extends State<UpsertTodoPage> {
         description: _descriptionController.text,
         isCompleted: false,
         createdAt: .now(),
-        expireAt: .now().add(Duration(days: 1)),
+        expireAt: .now().add(const Duration(days: 1)),
       );
 
   bool get isEdit => widget.todo != null;
@@ -56,13 +59,13 @@ class _UpsertTodoPageState extends State<UpsertTodoPage> {
     Navigator.of(context).pop();
   }
 
-  void _changeExpireAt() async {
+  Future<void> _changeExpireAt() async {
     final selectedDate = await showDatePicker(
       context: context,
       initialDate: _todo.expireAt,
       firstDate: DateTime.now(),
       lastDate: DateTime.now().add(
-        Duration(days: 365),
+        const Duration(days: 365),
       ),
     );
 
@@ -96,7 +99,7 @@ class _UpsertTodoPageState extends State<UpsertTodoPage> {
 
   @override
   Widget build(BuildContext context) {
-    final pageTitle = isEdit ? "Modifica Todo" : "Aggiungi Todo";
+    final pageTitle = isEdit ? 'Modifica Todo' : 'Aggiungi Todo';
     final todoExpireAt = _todo.expireAt.isToday
         ? "Oggi, ${_todo.expireAt.format('HH:mm')}"
         : _todo.expireAt.isTomorrow
@@ -116,7 +119,7 @@ class _UpsertTodoPageState extends State<UpsertTodoPage> {
         child: CustomScrollView(
           slivers: [
             SliverPadding(
-              padding: .all(16),
+              padding: const .all(16),
               sliver: SliverToBoxAdapter(
                 child: Form(
                   key: _formKey,
@@ -124,34 +127,34 @@ class _UpsertTodoPageState extends State<UpsertTodoPage> {
                     crossAxisAlignment: .start,
                     children: [
                       Text(
-                        "Titolo",
+                        'Titolo',
                         style: context.textTheme.labelLarge,
                       ),
-                      SizedBox(height: 8),
+                      const SizedBox(height: 8),
                       TextFormField(
                         controller: _titleController,
-                        decoration: InputDecoration(
+                        decoration: const InputDecoration(
                           border: OutlineInputBorder(
                             borderRadius: .all(.circular(8)),
                           ),
                         ),
                         validator: (value) {
                           if (value == null || value.isEmpty) {
-                            return "Il titolo è obbligatorio";
+                            return 'Il titolo è obbligatorio';
                           }
                           return null;
                         },
                         onTapOutside: (_) => FocusScope.of(context).unfocus(),
                       ),
-                      SizedBox(height: 16),
+                      const SizedBox(height: 16),
                       Text(
-                        "Descrizione",
+                        'Descrizione',
                         style: context.textTheme.labelLarge,
                       ),
-                      SizedBox(height: 8),
+                      const SizedBox(height: 8),
                       TextFormField(
                         controller: _descriptionController,
-                        decoration: InputDecoration(
+                        decoration: const InputDecoration(
                           border: OutlineInputBorder(
                             borderRadius: .all(.circular(8)),
                           ),
@@ -159,24 +162,24 @@ class _UpsertTodoPageState extends State<UpsertTodoPage> {
                         maxLines: 5,
                         validator: (value) {
                           if (value == null || value.isEmpty) {
-                            return "La descrizione è obbligatoria";
+                            return 'La descrizione è obbligatoria';
                           }
                           return null;
                         },
                         onTapOutside: (_) => FocusScope.of(context).unfocus(),
                       ),
-                      SizedBox(height: 16),
+                      const SizedBox(height: 16),
                       Text(
-                        "Categoria",
+                        'Categoria',
                         style: context.textTheme.labelLarge,
                       ),
-                      SizedBox(height: 4),
+                      const SizedBox(height: 4),
                       SizedBox(
                         height: 48,
                         child: ListView.separated(
                           scrollDirection: .horizontal,
                           separatorBuilder: (context, index) =>
-                              SizedBox(width: 16),
+                              const SizedBox(width: 16),
                           itemCount: TodoCategory.values.length,
                           itemBuilder: (context, index) {
                             final category = TodoCategory.values[index];
@@ -195,31 +198,36 @@ class _UpsertTodoPageState extends State<UpsertTodoPage> {
                           },
                         ),
                       ),
-                      SizedBox(height: 16),
+                      const SizedBox(height: 16),
                       Text(
                         'Scadenza',
                         style: context.textTheme.labelLarge,
                       ),
-                      SizedBox(height: 8),
+                      const SizedBox(height: 8),
                       Container(
-                        padding: .only(left: 12, top: 4, bottom: 4, right: 4),
+                        padding: const .only(
+                          left: 12,
+                          top: 4,
+                          bottom: 4,
+                          right: 4,
+                        ),
                         decoration: BoxDecoration(
                           border: .all(color: Colors.grey),
-                          borderRadius: .all(.circular(8)),
+                          borderRadius: const .all(.circular(8)),
                         ),
                         child: Row(
                           children: [
                             Row(
                               mainAxisSize: .min,
                               children: [
-                                Icon(Icons.calendar_month),
-                                SizedBox(width: 8),
+                                const Icon(Icons.calendar_month),
+                                const SizedBox(width: 8),
                                 Text(todoExpireAt),
                               ],
                             ),
-                            Spacer(),
+                            const Spacer(),
                             IconButton(
-                              icon: Icon(Icons.chevron_right),
+                              icon: const Icon(Icons.chevron_right),
                               onPressed: _changeExpireAt,
                             ),
                           ],
@@ -238,7 +246,7 @@ class _UpsertTodoPageState extends State<UpsertTodoPage> {
                   SizedBox(
                     width: .infinity,
                     child: Padding(
-                      padding: .only(
+                      padding: const .only(
                         top: 8,
                         bottom: 8,
                         left: 16,
@@ -246,7 +254,7 @@ class _UpsertTodoPageState extends State<UpsertTodoPage> {
                       ),
                       child: FilledButton(
                         onPressed: _saveTodo,
-                        child: Text(isEdit ? "Modifica" : "Aggiungi"),
+                        child: Text(isEdit ? 'Modifica' : 'Aggiungi'),
                       ),
                     ),
                   ),
@@ -257,9 +265,9 @@ class _UpsertTodoPageState extends State<UpsertTodoPage> {
                         mainAxisSize: .min,
                         children: [
                           Icon(Icons.delete, color: context.colorScheme.error),
-                          SizedBox(width: 8),
+                          const SizedBox(width: 8),
                           Text(
-                            "Elimina",
+                            'Elimina',
                             style: TextStyle(color: context.colorScheme.error),
                           ),
                         ],

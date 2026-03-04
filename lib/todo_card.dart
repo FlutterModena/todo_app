@@ -2,12 +2,15 @@ import 'package:flutter/material.dart';
 import 'package:test/extensions.dart';
 import 'package:test/todo_model.dart';
 
+/// A widget that represents a single todo item in the list.
 class TodoCard extends StatelessWidget {
+  /// Creates a [TodoCard] widget.
   const TodoCard({
-    super.key,
     required this.todo,
+    super.key,
   });
 
+  /// The todo model to display.
   final TodoModel todo;
 
   @override
@@ -19,18 +22,18 @@ class TodoCard extends StatelessWidget {
         borderRadius: .circular(16),
       ),
       child: Padding(
-        padding: .all(16),
+        padding: const .all(16),
         child: Column(
           crossAxisAlignment: .start,
           children: [
             Text(
               todo.title,
-              style: TextStyle(
+              style: const TextStyle(
                 fontSize: 18,
                 fontWeight: .bold,
               ),
             ),
-            SizedBox(height: 8),
+            const SizedBox(height: 8),
             Text(todo.description),
           ],
         ),

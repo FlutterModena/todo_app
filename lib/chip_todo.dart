@@ -1,10 +1,19 @@
 import 'package:flutter/material.dart';
 import 'package:test/extensions.dart';
 
+/// A simple widget that represents a chip with a title and an active state.
 class ChipTodo extends StatelessWidget {
-  const ChipTodo({super.key, required this.title, required this.isActive});
+  /// Creates a [ChipTodo] widget.
+  const ChipTodo({
+    required this.title,
+    required this.isActive,
+    super.key,
+  });
 
+  /// The title of the chip.
   final String title;
+
+  /// Whether the chip is active or not.
   final bool isActive;
 
   @override
@@ -19,11 +28,11 @@ class ChipTodo extends StatelessWidget {
         borderRadius: .circular(20),
       ),
       child: Padding(
-        padding: .symmetric(horizontal: 16),
+        padding: const .symmetric(horizontal: 16),
         child: Center(
           child: Text(
             title,
-            style: TextStyle(
+            style: const TextStyle(
               color: Colors.white,
             ),
           ),

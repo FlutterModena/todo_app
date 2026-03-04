@@ -1,11 +1,15 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 import 'package:test/extensions.dart';
-import 'package:test/todo_model.dart';
 import 'package:test/todo_card.dart';
 import 'package:test/todo_filters.dart';
+import 'package:test/todo_model.dart';
 import 'package:test/upsert_todo_page.dart';
 
+/// The home page of the app, where the list of todos is displayed.
 class HomePage extends StatefulWidget {
+  /// Creates a [HomePage] widget.
   const HomePage({super.key});
 
   @override
@@ -22,7 +26,7 @@ class _HomePageState extends State<HomePage> {
       category: TodoCategory.work,
       isCompleted: false,
       createdAt: .now(),
-      expireAt: .now().add(Duration(days: 7)),
+      expireAt: .now().add(const Duration(days: 7)),
     ),
   ];
 
@@ -38,12 +42,12 @@ class _HomePageState extends State<HomePage> {
       appBar: AppBar(
         forceMaterialTransparency: true,
         leadingWidth: 64,
-        leading: Column(
+        leading: const Column(
           mainAxisAlignment: .center,
           children: [
             CircleAvatar(
               backgroundImage: NetworkImage(
-                "https://gravatar.com/avatar/9b1c8e5a0c7f2d9e4b8a1c6e5f3a2b?s=200&d=robohash&r=x",
+                'https://gravatar.com/avatar/9b1c8e5a0c7f2d9e4b8a1c6e5f3a2b?s=200&d=robohash&r=x',
               ),
             ),
           ],
@@ -51,7 +55,7 @@ class _HomePageState extends State<HomePage> {
         actions: [
           IconButton(
             onPressed: () {},
-            icon: Icon(Icons.notifications),
+            icon: const Icon(Icons.notifications),
           ),
         ],
       ),
@@ -59,21 +63,23 @@ class _HomePageState extends State<HomePage> {
         onPressed: () {
           // TODO(dariowskii): create a shorcut in extensions for this
           // TODO(dariowskii): save the new todo in the list
-          Navigator.of(context).push(
-            MaterialPageRoute(
-              builder: (_) => UpsertTodoPage(),
+          unawaited(
+            Navigator.of(context).push(
+              MaterialPageRoute(
+                builder: (_) => const UpsertTodoPage(),
+              ),
             ),
           );
         },
-        child: Icon(Icons.add),
+        child: const Icon(Icons.add),
       ),
       body: Padding(
-        padding: .symmetric(horizontal: 16),
+        padding: const .symmetric(horizontal: 16),
         child: CustomScrollView(
           slivers: [
             SliverToBoxAdapter(
               child: Padding(
-                padding: .only(top: 16, bottom: 4),
+                padding: const .only(top: 16, bottom: 4),
                 child: Text(
                   'Ciao! Ecco i tuoi task',
                   style: context.textTheme.headlineLarge?.copyWith(
@@ -84,7 +90,7 @@ class _HomePageState extends State<HomePage> {
             ),
             SliverToBoxAdapter(
               child: Padding(
-                padding: .only(bottom: 24),
+                padding: const .only(bottom: 24),
                 child: Text(DateTime.now().format('EEEE, dd MMMM')),
               ),
             ),
@@ -95,10 +101,10 @@ class _HomePageState extends State<HomePage> {
               ),
             ),
             SliverPadding(
-              padding: .symmetric(vertical: 16),
+              padding: const .symmetric(vertical: 16),
               sliver: SliverList.separated(
                 itemCount: todos.length,
-                separatorBuilder: (_, _) => SizedBox(height: 16),
+                separatorBuilder: (_, _) => const SizedBox(height: 16),
                 itemBuilder: (_, index) => TodoCard(todo: todos[index]),
               ),
             ),

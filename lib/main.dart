@@ -3,7 +3,9 @@ import 'package:test/home_page.dart';
 
 void main() => runApp(const MyApp());
 
+/// The main app widget.
 class MyApp extends StatelessWidget {
+  /// Creates a [MyApp] widget.
   const MyApp({super.key});
 
   @override
