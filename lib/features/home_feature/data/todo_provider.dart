@@ -30,23 +30,20 @@ Future<List<TodoModel>> filteredTodoList(
   return todos.where((todo) => todo.category == category).toList();
 }
 
-/// A provider that adds a new todo to the list.
+/// A provider that update or insert a todo in the list.
 @riverpod
-void addTodo(Ref ref, TodoModel todo) {
+void upsertTodo(Ref ref, TodoModel todo) {
+  final index = todos.indexWhere((item) => item.id == todo.id);
+  if (index != -1) {
+    todos[index] = todo;
+    return;
+  }
+
   final lastTodo = todos.isNotEmpty ? todos.last : null;
   final newId = (lastTodo?.id ?? 0) + 1;
   final newTodo = todo.copyWith(id: newId);
 
   todos.add(newTodo);
-}
-
-/// A provider that updates an existing todo in the list.
-@riverpod
-void updateTodo(Ref ref, TodoModel updatedTodo) {
-  final index = todos.indexWhere((todo) => todo.id == updatedTodo.id);
-  if (index != -1) {
-    todos[index] = updatedTodo;
-  }
 }
 
 /// A provider that deletes a todo from the list.

@@ -3,6 +3,7 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:todo_app/common/models/todo_model.dart';
+import 'package:todo_app/extensions.dart';
 import 'package:todo_app/features/home_feature/data/todo_provider.dart';
 import 'package:todo_app/features/home_feature/presentation/todo_card.dart';
 import 'package:todo_app/features/upsert_feature/presentation/upsert_todo_page.dart';
@@ -59,13 +60,7 @@ class _ListHandler extends StatelessWidget {
         return GestureDetector(
           onTap: () {
             unawaited(
-              Navigator.of(context).push(
-                MaterialPageRoute(
-                  builder: (_) => UpsertTodoPage(
-                    todo: todos[index],
-                  ),
-                ),
-              ),
+              UpsertTodoPage(todo: todos[index]).push(context),
             );
           },
           child: TodoCard(todo: todos[index]),

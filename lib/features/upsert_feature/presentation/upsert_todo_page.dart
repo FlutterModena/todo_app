@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:todo_app/common/models/todo_model.dart';
 import 'package:todo_app/extensions.dart';
+import 'package:todo_app/features/home_feature/data/todo_provider.dart';
 
 /// A page that allows the user to create a new todo or edit an existing one.
-class UpsertTodoPage extends StatefulWidget {
+class UpsertTodoPage extends ConsumerStatefulWidget {
   /// Creates an [UpsertTodoPage] widget.
   const UpsertTodoPage({
     super.key,
@@ -14,10 +16,10 @@ class UpsertTodoPage extends StatefulWidget {
   final TodoModel? todo;
 
   @override
-  State<UpsertTodoPage> createState() => _UpsertTodoPageState();
+  ConsumerState<UpsertTodoPage> createState() => _UpsertTodoPageState();
 }
 
-class _UpsertTodoPageState extends State<UpsertTodoPage> {
+class _UpsertTodoPageState extends ConsumerState<UpsertTodoPage> {
   late final _formKey = GlobalKey<FormState>();
   late final _titleController = TextEditingController(
     text: widget.todo?.title,
@@ -30,7 +32,7 @@ class _UpsertTodoPageState extends State<UpsertTodoPage> {
   late TodoModel _todo =
       widget.todo ??
       TodoModel(
-        id: 0,
+        id: -1,
         title: _titleController.text,
         description: _descriptionController.text,
         isCompleted: false,
@@ -48,14 +50,50 @@ class _UpsertTodoPageState extends State<UpsertTodoPage> {
   }
 
   void _saveTodo() {
-    if (_formKey.currentState?.validate() ?? false) {
-      // TODO(dariowskii): save the new todo in the list
-      Navigator.of(context).pop();
+    if (_formKey.currentState?.validate() == false) {
+      return;
     }
+
+    final model = _todo.copyWith(
+      title: _titleController.text,
+      description: _descriptionController.text,
+      category: _category,
+    );
+
+    ref.read(upsertTodoProvider(model));
+
+    Navigator.of(context).pop();
   }
 
-  void _deleteTodo() {
-    // TODO(dariowskii): delete the todo from the list
+  Future<void> _deleteTodo() async {
+    if (!isEdit) {
+      return;
+    }
+
+    final confirm = await showDialog<bool>(
+      context: context,
+      builder: (context) => AlertDialog(
+        title: const Text('Conferma eliminazione'),
+        content: const Text('Sei sicuro di voler eliminare questo todo?'),
+        actions: [
+          TextButton(
+            onPressed: () => Navigator.of(context).pop(false),
+            child: const Text('Annulla'),
+          ),
+          TextButton(
+            onPressed: () => Navigator.of(context).pop(true),
+            child: const Text('Elimina'),
+          ),
+        ],
+      ),
+    );
+
+    if (confirm != true || !mounted) {
+      return;
+    }
+
+    ref.read(deleteTodoProvider(widget.todo!.id));
+
     Navigator.of(context).pop();
   }
 

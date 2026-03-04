@@ -50,14 +50,8 @@ class _HomePageState extends ConsumerState<HomePage> {
       ),
       floatingActionButton: FloatingActionButton(
         onPressed: () {
-          // TODO(dariowskii): create a shorcut in extensions for this
-          // TODO(dariowskii): save the new todo in the list
           unawaited(
-            Navigator.of(context).push(
-              MaterialPageRoute(
-                builder: (_) => const UpsertTodoPage(),
-              ),
-            ),
+            const UpsertTodoPage().push(context),
           );
         },
         child: const Icon(Icons.add),
