@@ -53,6 +53,10 @@ class _HomePageState extends State<HomePage> {
           ),
         ],
       ),
+      floatingActionButton: FloatingActionButton(
+        onPressed: () {},
+        child: Icon(Icons.add),
+      ),
       body: Padding(
         padding: .symmetric(horizontal: 16),
         child: CustomScrollView(
