@@ -32,7 +32,7 @@ class _UpsertTodoPageState extends State<UpsertTodoPage> {
         description: _descriptionController.text,
         isCompleted: false,
         createdAt: .now(),
-        expireAt: .now(),
+        expireAt: .now().add(Duration(days: 1)),
       );
 
   bool get isEdit => widget.todo != null;
