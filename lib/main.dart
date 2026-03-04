@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:test/extensions.dart';
+import 'package:test/models/todo_model.dart';
+import 'package:test/widgets/todo_card.dart';
 import 'package:test/widgets/todo_filters.dart';
 
 void main() => runApp(const MyApp());
@@ -41,6 +43,17 @@ class _MyHomePageState extends State<MyHomePage> {
 
   @override
   Widget build(BuildContext context) {
+    final todos = [
+      TodoModel(
+        id: '1',
+        title: 'Title 1',
+        description: 'Description 1',
+        category: 'Category 1',
+        isCompleted: false,
+        createdAt: DateTime.now(),
+        expireAt: DateTime.now().add(Duration(days: 7)),
+      ),
+    ];
     return Scaffold(
       appBar: AppBar(
         leading: Column(
@@ -81,15 +94,21 @@ class _MyHomePageState extends State<MyHomePage> {
             SliverToBoxAdapter(
               child: Padding(
                 padding: const EdgeInsets.only(bottom: 24),
-                child: Text(
-                  DateTime.now().format('EEEE, dd MMMM')
-                ),
+                child: Text(DateTime.now().format('EEEE, dd MMMM')),
               ),
             ),
             SliverToBoxAdapter(
               child: TodoFilters(
                 currentIndex: _index,
                 onChange: _changeFilter,
+              ),
+            ),
+            SliverPadding(
+              padding: const EdgeInsets.symmetric(vertical: 16),
+              sliver: SliverList.separated(
+                itemCount: todos.length,
+                separatorBuilder: (_, _) => SizedBox(height: 16),
+                itemBuilder: (_, index) => TodoCard(todo: todos[index]),
               ),
             ),
           ],
