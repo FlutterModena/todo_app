@@ -1,4 +1,3 @@
-
 import 'package:flutter/material.dart';
 import 'package:test/extensions.dart';
 import 'package:test/todo_model.dart';
@@ -15,6 +14,17 @@ class HomePage extends StatefulWidget {
 
 class _HomePageState extends State<HomePage> {
   int _index = 0;
+  late final todos = [
+    TodoModel(
+      id: '1',
+      title: 'Title 1',
+      description: 'Description 1',
+      category: 'Category 1',
+      isCompleted: false,
+      createdAt: .now(),
+      expireAt: .now().add(Duration(days: 7)),
+    ),
+  ];
 
   void _changeFilter(int index) {
     setState(() {
@@ -24,17 +34,6 @@ class _HomePageState extends State<HomePage> {
 
   @override
   Widget build(BuildContext context) {
-    final todos = [
-      TodoModel(
-        id: '1',
-        title: 'Title 1',
-        description: 'Description 1',
-        category: 'Category 1',
-        isCompleted: false,
-        createdAt: .now(),
-        expireAt: .now().add(Duration(days: 7)),
-      ),
-    ];
     return Scaffold(
       appBar: AppBar(
         forceMaterialTransparency: true,
@@ -59,6 +58,7 @@ class _HomePageState extends State<HomePage> {
       floatingActionButton: FloatingActionButton(
         onPressed: () {
           // TODO(dariowskii): create a shorcut in extensions for this
+          // TODO(dariowskii): save the new todo in the list
           Navigator.of(context).push(
             MaterialPageRoute(
               builder: (_) => UpsertTodoPage(),
