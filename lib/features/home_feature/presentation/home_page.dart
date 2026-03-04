@@ -3,8 +3,7 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:todo_app/extensions.dart';
-import 'package:todo_app/features/home_feature/data/todo_provider.dart';
-import 'package:todo_app/features/home_feature/presentation/todo_card.dart';
+import 'package:todo_app/features/home_feature/presentation/dynamic_todo_list.dart';
 import 'package:todo_app/features/home_feature/presentation/todo_filters.dart';
 import 'package:todo_app/features/upsert_feature/presentation/upsert_todo_page.dart';
 
@@ -28,7 +27,6 @@ class _HomePageState extends ConsumerState<HomePage> {
 
   @override
   Widget build(BuildContext context) {
-    final todoList = ref.watch(todoListProvider);
     return Scaffold(
       appBar: AppBar(
         forceMaterialTransparency: true,
@@ -91,38 +89,11 @@ class _HomePageState extends ConsumerState<HomePage> {
                 onChange: _changeFilter,
               ),
             ),
-            SliverPadding(
-              padding: const .symmetric(vertical: 16),
-              sliver: switch (todoList) {
-                AsyncData(value: final todos) => SliverList.separated(
-                  itemCount: todos.length,
-                  separatorBuilder: (_, _) => const SizedBox(height: 16),
-                  itemBuilder: (_, index) {
-                    return GestureDetector(
-                      onTap: () {
-                        unawaited(
-                          Navigator.of(context).push(
-                            MaterialPageRoute(
-                              builder: (_) => UpsertTodoPage(
-                                todo: todos[index],
-                              ),
-                            ),
-                          ),
-                        );
-                      },
-                      child: TodoCard(todo: todos[index]),
-                    );
-                  },
-                ),
-                AsyncError(:final error) => SliverToBoxAdapter(
-                  child: Text('Errore: $error'),
-                ),
-                _ => const SliverToBoxAdapter(
-                  child: Center(
-                    child: CircularProgressIndicator(),
-                  ),
-                ),
-              },
+            const SliverPadding(
+              padding: .symmetric(vertical: 16),
+              sliver: SliverToBoxAdapter(
+                child: DynamicTodoList(),
+              ),
             ),
           ],
         ),
