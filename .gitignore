@@ -46,3 +46,7 @@ app.*.map.json
 
 # FVM Version Cache
 .fvm/
+
+# Flutter Generated Files
+*.freezed.dart
+*.g.dart
