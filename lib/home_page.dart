@@ -16,7 +16,7 @@ class _HomePageState extends State<HomePage> {
   int _index = 0;
   late final todos = [
     TodoModel(
-      id: '1',
+      id: 0,
       title: 'Title 1',
       description: 'Description 1',
       category: TodoCategory.work,

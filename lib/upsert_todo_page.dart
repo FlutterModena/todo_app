@@ -27,7 +27,7 @@ class _UpsertTodoPageState extends State<UpsertTodoPage> {
   late var _todo =
       widget.todo ??
       TodoModel(
-        id: '1',
+        id: 0,
         title: _titleController.text,
         description: _descriptionController.text,
         isCompleted: false,
