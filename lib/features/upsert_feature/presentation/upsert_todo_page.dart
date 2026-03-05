@@ -64,7 +64,7 @@ class _UpsertTodoPageState extends ConsumerState<UpsertTodoPage> {
       category: _category,
     );
 
-    ref.read(upsertTodoProvider(model));
+    ref.read(todoListProvider.notifier).upsertTodo(model);
 
     Navigator.of(context).pop();
   }
@@ -96,7 +96,7 @@ class _UpsertTodoPageState extends ConsumerState<UpsertTodoPage> {
       return;
     }
 
-    ref.read(deleteTodoProvider(widget.todo!.id));
+    ref.read(todoListProvider.notifier).deleteTodo(widget.todo!.id);
 
     Navigator.of(context).pop();
   }

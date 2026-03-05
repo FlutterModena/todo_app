@@ -26,7 +26,7 @@ class DynamicTodoList extends ConsumerWidget {
     );
 
     return switch (todoList) {
-      AsyncData(value: final todos) => _ListHandler(todos: todos),
+      AsyncData(value: final wrapper) => _ListHandler(todos: wrapper.todos),
       AsyncError(:final error) => SliverFillRemaining(
         hasScrollBody: false,
         child: Center(
