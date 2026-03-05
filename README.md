@@ -15,10 +15,26 @@ Se usi FVM, assicurati di usare la versione di Flutter specificata nel file [.fv
 fvm install # Prende in automatico la versione specificata
 ```
 
+Per gli utenti con FVM, da ora in poi come prefisso usa il comando `fvm`.
+
+Scarica le dipendenze:
+
+```bash
+(fvm) flutter pub get
+```
+
+In un terminale, all'interno della root del progetto, avvia il `build_runner`:
+
+```bash
+(fvm) dart run build_runner watch # "watch" per restare in ascolto sui cambiamenti dei file e ricreare solo i file necessari
+```
+
+---
+
 Per avviare l'applicazione, esegui il comando nella root del progetto:
 
 ```bash
-flutter run
+(fvm) flutter run
 ```
 
 oppure da VSCode, seleziona il target dispositivo e lancia l'applicazione con una delle configurazioni disponibili in [launch.json](.vscode/launch.json).
