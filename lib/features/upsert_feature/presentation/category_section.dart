@@ -20,12 +20,12 @@ class CategorySection extends StatelessWidget {
   Widget build(BuildContext context) {
     return Column(
       crossAxisAlignment: .start,
+      spacing: 4,
       children: [
         Text(
           'Categoria',
           style: context.textTheme.labelLarge,
         ),
-        const SizedBox(height: 4),
         SizedBox(
           height: 48,
           child: ListView.separated(

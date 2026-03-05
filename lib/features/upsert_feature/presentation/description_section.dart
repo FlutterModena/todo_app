@@ -16,12 +16,12 @@ class DescriptionSection extends StatelessWidget {
   Widget build(BuildContext context) {
     return Column(
       crossAxisAlignment: .start,
+      spacing: 8,
       children: [
         Text(
           'Descrizione',
           style: context.textTheme.labelLarge,
         ),
-        const SizedBox(height: 8),
         TextFormField(
           controller: controller,
           decoration: const InputDecoration(

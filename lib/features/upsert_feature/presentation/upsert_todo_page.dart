@@ -5,6 +5,7 @@ import 'package:todo_app/extensions.dart';
 import 'package:todo_app/features/home_feature/data/todo_provider.dart';
 import 'package:todo_app/features/upsert_feature/presentation/category_section.dart';
 import 'package:todo_app/features/upsert_feature/presentation/description_section.dart';
+import 'package:todo_app/features/upsert_feature/presentation/expiration_section.dart';
 import 'package:todo_app/features/upsert_feature/presentation/title_section.dart';
 
 /// A page that allows the user to create a new todo or edit an existing one.
@@ -100,52 +101,10 @@ class _UpsertTodoPageState extends ConsumerState<UpsertTodoPage> {
     Navigator.of(context).pop();
   }
 
-  Future<void> _changeExpireAt() async {
-    final selectedDate = await showDatePicker(
-      context: context,
-      initialDate: _todo.expireAt,
-      firstDate: DateTime.now(),
-      lastDate: DateTime.now().add(
-        const Duration(days: 365),
-      ),
-    );
-
-    if (selectedDate == null || !mounted) {
-      return;
-    }
-
-    final selectedTime = await showTimePicker(
-      context: context,
-      initialTime: TimeOfDay.fromDateTime(
-        _todo.expireAt,
-      ),
-    );
-
-    if (selectedTime == null) {
-      return;
-    }
-
-    final newExpireAt = DateTime(
-      selectedDate.year,
-      selectedDate.month,
-      selectedDate.day,
-      selectedTime.hour,
-      selectedTime.minute,
-    );
-
-    setState(() {
-      _todo = _todo.copyWith(expireAt: newExpireAt);
-    });
-  }
-
   @override
   Widget build(BuildContext context) {
     final pageTitle = isEdit ? 'Modifica Todo' : 'Aggiungi Todo';
-    final todoExpireAt = _todo.expireAt.isToday
-        ? "Oggi, ${_todo.expireAt.format('HH:mm')}"
-        : _todo.expireAt.isTomorrow
-        ? "Domani, ${_todo.expireAt.format('HH:mm')}"
-        : _todo.expireAt.format('EEEE, HH:mm');
+
     return Scaffold(
       resizeToAvoidBottomInset: false,
       appBar: AppBar(
@@ -180,39 +139,13 @@ class _UpsertTodoPageState extends ConsumerState<UpsertTodoPage> {
                         },
                       ),
                       const SizedBox(height: 16),
-                      Text(
-                        'Scadenza',
-                        style: context.textTheme.labelLarge,
-                      ),
-                      const SizedBox(height: 8),
-                      Container(
-                        padding: const .only(
-                          left: 12,
-                          top: 4,
-                          bottom: 4,
-                          right: 4,
-                        ),
-                        decoration: BoxDecoration(
-                          border: .all(color: Colors.grey),
-                          borderRadius: const .all(.circular(8)),
-                        ),
-                        child: Row(
-                          children: [
-                            Row(
-                              mainAxisSize: .min,
-                              children: [
-                                const Icon(Icons.calendar_month),
-                                const SizedBox(width: 8),
-                                Text(todoExpireAt),
-                              ],
-                            ),
-                            const Spacer(),
-                            IconButton(
-                              icon: const Icon(Icons.chevron_right),
-                              onPressed: _changeExpireAt,
-                            ),
-                          ],
-                        ),
+                      ExpirationSection(
+                        todo: _todo,
+                        onChange: (todo) {
+                          setState(() {
+                            _todo = todo;
+                          });
+                        },
                       ),
                     ],
                   ),
