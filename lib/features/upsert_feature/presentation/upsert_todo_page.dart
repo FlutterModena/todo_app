@@ -125,11 +125,10 @@ class _UpsertTodoPageState extends ConsumerState<UpsertTodoPage> {
                   key: _formKey,
                   child: Column(
                     crossAxisAlignment: .start,
+                    spacing: 16,
                     children: [
                       TitleSection(controller: _titleController),
-                      const SizedBox(height: 16),
                       DescriptionSection(controller: _descriptionController),
-                      const SizedBox(height: 16),
                       CategorySection(
                         category: _category,
                         onChange: (category) {
@@ -138,7 +137,6 @@ class _UpsertTodoPageState extends ConsumerState<UpsertTodoPage> {
                           });
                         },
                       ),
-                      const SizedBox(height: 16),
                       ExpirationSection(
                         todo: _todo,
                         onChange: (todo) {
