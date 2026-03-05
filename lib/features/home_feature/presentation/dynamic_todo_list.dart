@@ -11,11 +11,19 @@ import 'package:todo_app/features/upsert_feature/presentation/upsert_todo_page.d
 /// A widget that displays a list of todos, which is fetched from the provider.
 class DynamicTodoList extends ConsumerWidget {
   /// Creates a [DynamicTodoList] widget.
-  const DynamicTodoList({super.key});
+  const DynamicTodoList({
+    super.key,
+    this.filter,
+  });
+
+  /// The filter for the list of todos, or null if no filter is applied.
+  final TodoCategory? filter;
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final todoList = ref.watch(todoListProvider);
+    final todoList = ref.watch(
+      filteredTodoListProvider(category: filter),
+    );
 
     return switch (todoList) {
       AsyncData(value: final todos) => _ListHandler(todos: todos),

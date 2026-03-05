@@ -2,6 +2,7 @@ import 'dart:async';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:todo_app/common/models/todo_model.dart';
 import 'package:todo_app/extensions.dart';
 import 'package:todo_app/features/home_feature/presentation/dynamic_todo_list.dart';
 import 'package:todo_app/features/home_feature/presentation/todo_filters.dart';
@@ -17,11 +18,11 @@ class HomePage extends ConsumerStatefulWidget {
 }
 
 class _HomePageState extends ConsumerState<HomePage> {
-  int _index = 0;
+  TodoCategory? _todoFilter;
 
-  void _changeFilter(int index) {
+  void _changeFilter(TodoCategory? newFilter) {
     setState(() {
-      _index = index;
+      _todoFilter = newFilter;
     });
   }
 
@@ -79,13 +80,15 @@ class _HomePageState extends ConsumerState<HomePage> {
             ),
             SliverToBoxAdapter(
               child: TodoFilters(
-                currentIndex: _index,
+                filter: _todoFilter,
                 onChange: _changeFilter,
               ),
             ),
-            const SliverPadding(
-              padding: .symmetric(vertical: 16),
-              sliver: DynamicTodoList(),
+            SliverPadding(
+              padding: const .symmetric(vertical: 16),
+              sliver: DynamicTodoList(
+                filter: _todoFilter,
+              ),
             ),
           ],
         ),
