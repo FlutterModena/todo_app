@@ -3,6 +3,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:todo_app/common/models/todo_model.dart';
 import 'package:todo_app/extensions.dart';
 import 'package:todo_app/features/home_feature/data/todo_provider.dart';
+import 'package:todo_app/features/upsert_feature/presentation/category_section.dart';
 import 'package:todo_app/features/upsert_feature/presentation/description_section.dart';
 import 'package:todo_app/features/upsert_feature/presentation/title_section.dart';
 
@@ -170,34 +171,13 @@ class _UpsertTodoPageState extends ConsumerState<UpsertTodoPage> {
                       const SizedBox(height: 16),
                       DescriptionSection(controller: _descriptionController),
                       const SizedBox(height: 16),
-                      Text(
-                        'Categoria',
-                        style: context.textTheme.labelLarge,
-                      ),
-                      const SizedBox(height: 4),
-                      SizedBox(
-                        height: 48,
-                        child: ListView.separated(
-                          scrollDirection: .horizontal,
-                          separatorBuilder: (context, index) =>
-                              const SizedBox(width: 16),
-                          itemCount: TodoCategory.values.length,
-                          itemBuilder: (context, index) {
-                            final category = TodoCategory.values[index];
-                            return ChoiceChip(
-                              label: Text(category.label),
-                              avatar: Icon(category.icon, size: 16),
-                              selected: _category == category,
-                              onSelected: (selected) {
-                                if (selected) {
-                                  setState(() {
-                                    _category = category;
-                                  });
-                                }
-                              },
-                            );
-                          },
-                        ),
+                      CategorySection(
+                        category: _category,
+                        onChange: (category) {
+                          setState(() {
+                            _category = category;
+                          });
+                        },
                       ),
                       const SizedBox(height: 16),
                       Text(
