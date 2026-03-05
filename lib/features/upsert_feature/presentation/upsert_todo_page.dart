@@ -3,6 +3,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:todo_app/common/models/todo_model.dart';
 import 'package:todo_app/extensions.dart';
 import 'package:todo_app/features/home_feature/data/todo_provider.dart';
+import 'package:todo_app/features/upsert_feature/presentation/title_section.dart';
 
 /// A page that allows the user to create a new todo or edit an existing one.
 class UpsertTodoPage extends ConsumerStatefulWidget {
@@ -164,26 +165,7 @@ class _UpsertTodoPageState extends ConsumerState<UpsertTodoPage> {
                   child: Column(
                     crossAxisAlignment: .start,
                     children: [
-                      Text(
-                        'Titolo',
-                        style: context.textTheme.labelLarge,
-                      ),
-                      const SizedBox(height: 8),
-                      TextFormField(
-                        controller: _titleController,
-                        decoration: const InputDecoration(
-                          border: OutlineInputBorder(
-                            borderRadius: .all(.circular(8)),
-                          ),
-                        ),
-                        validator: (value) {
-                          if (value == null || value.isEmpty) {
-                            return 'Il titolo è obbligatorio';
-                          }
-                          return null;
-                        },
-                        onTapOutside: (_) => FocusScope.of(context).unfocus(),
-                      ),
+                      TitleSection(controller: _titleController),
                       const SizedBox(height: 16),
                       Text(
                         'Descrizione',
