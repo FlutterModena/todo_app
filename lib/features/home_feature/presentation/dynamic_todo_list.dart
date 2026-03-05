@@ -33,7 +33,7 @@ class DynamicTodoList extends ConsumerWidget {
           child: Text('Errore: $error'),
         ),
       ),
-      _ => const SliverFillRemaining(
+      AsyncLoading() => const SliverFillRemaining(
         hasScrollBody: false,
         child: Center(
           child: CircularProgressIndicator(),
