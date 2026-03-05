@@ -175,9 +175,9 @@ class _UpsertTodoPageState extends ConsumerState<UpsertTodoPage> {
                       onPressed: _deleteTodo,
                       child: Row(
                         mainAxisSize: .min,
+                        spacing: 8,
                         children: [
                           Icon(Icons.delete, color: context.colorScheme.error),
-                          const SizedBox(width: 8),
                           Text(
                             'Elimina',
                             style: TextStyle(color: context.colorScheme.error),
