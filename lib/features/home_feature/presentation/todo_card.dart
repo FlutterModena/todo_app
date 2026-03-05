@@ -25,6 +25,7 @@ class TodoCard extends StatelessWidget {
         padding: const .all(16),
         child: Column(
           crossAxisAlignment: .start,
+          spacing: 8,
           children: [
             Text(
               todo.title,
@@ -33,7 +34,6 @@ class TodoCard extends StatelessWidget {
                 fontWeight: .bold,
               ),
             ),
-            const SizedBox(height: 8),
             Text(todo.description),
           ],
         ),
